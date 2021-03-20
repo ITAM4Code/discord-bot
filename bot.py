@@ -27,7 +27,11 @@ async def version(context):
     embed.set_footer(text="Version")
     embed.set_author(name="ITAM4Code")
     await context.message.channel.send(embed=embed)
-        
+
+async def on_message(message):
+    if message.content.startswith('$hello'):
+        await message.channel.send('hello there :)')
+
 #Run client
 client.run(token)
     
