@@ -27,6 +27,15 @@ async def version(context):
     embed.set_footer(text="Version")
     embed.set_author(name="ITAM4Code")
     await context.message.channel.send(embed=embed)
+
+@client.command(name='assign')
+async def assign_proyect(context,args):
+    user=context.message.author
+    #if(args in user.guild.roles.name)
+    roles=user.guild.roles
+    if args in roles
+    await context.message.channel.send(user.guild.roles)
+    #role=discord.utils.get(user.server.roles, name=args)
         
 #Run client
 client.run(token)
