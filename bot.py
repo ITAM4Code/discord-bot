@@ -54,7 +54,7 @@ async def create_proyect(context, args):
 
 async def make_channel(context,name):
     guild=context.guild
-    admin=get(guild.roles,name="admin") #mesa en caso de usar el server de la OE
+    admin=get(guild.roles,name=approved_roles[0]) #mesa en caso de usar el server de la OE
     rol=get(guild.roles,name=name)
     overwrites={
         guild.default_role: discord.PermissionOverwrite(read_messages=False),
