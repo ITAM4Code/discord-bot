@@ -1,2 +1,6 @@
+librerías que queremos instalar con pip
+
+Discord
+Python-dotenv
 python -m pip install discord.py
 pip install -U python-dotenv
