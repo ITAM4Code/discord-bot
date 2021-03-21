@@ -8,9 +8,6 @@ import json
 from dotenv import load_dotenv
 from discord.utils import get
 
-#Import help.py
-from help_command import *
-
 #Load TOKEN
 load_dotenv()
 token=os.getenv('BOT_TOKEN')
