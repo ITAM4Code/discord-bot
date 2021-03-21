@@ -8,6 +8,9 @@ import json
 from dotenv import load_dotenv
 from discord.utils import get
 
+#Import help.py
+from help_command import *
+
 #Load TOKEN
 load_dotenv()
 token=os.getenv('BOT_TOKEN')
@@ -17,6 +20,10 @@ client = commands.Bot(command_prefix='--')
 
 #Approved roles to make few changes
 approved_roles=['admin','mesa']
+
+#Group command help
+client.remove_command("help")
+client.load_extension("help_command")
 
 #Event when connected
 @client.event
