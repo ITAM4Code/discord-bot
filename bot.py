@@ -51,8 +51,11 @@ async def create_proyect(context, args):
         await context.message.channel.send('Creando nuevo rol con nombre: '+args+' con permisos: '+str(perms))
         await context.guild.create_role(name=args,permissions=perms)
         await context.message.channel.send('Creando nuevo canal para el rol: '+args)
-        await make_channel(context,args)
-        await context.message.channel.send('Canal creado exitosamente')
+        if any(args in channel.name for channel in context.guild.channels):
+            await context.message.channel.send("Ya existe un canal con ese nombre")
+        else:
+            await make_channel(context,args)
+            await context.message.channel.send('Canal creado exitosamente')
     else:
         await context.message.channel.send('No eres administrador del servidor, no puedes crear nuevos proyectos')
 
