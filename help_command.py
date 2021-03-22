@@ -59,5 +59,14 @@ class Help(commands.Cog):
         embed.set_author(name="ITAM4Code")
         await context.channel.send(embed=embed)
 
+    @help.command()
+    async def leave(self,context):
+        embed= discord.Embed(title="leave", description= "Comando para que un usuario deje un proyecto al que esté asignado",color=0x00ff00)
+        embed.add_field(name="**Syntax**", value="--leave")
+        embed.add_field(name="Permissions", value="All Users")
+        embed.set_author(name="ITAM4Code")
+        await context.channel.send(embed=embed)
+
+
 def setup(bot):
     bot.add_cog(Help(bot))
