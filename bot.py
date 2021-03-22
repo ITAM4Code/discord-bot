@@ -17,10 +17,12 @@ client = commands.Bot(command_prefix='--')
 
 #Approved roles to make few changes
 approved_roles=['admin','mesa']
-
+other_roles=['@everyone','Colmillo']
 #Group command help
 client.remove_command("help")
 client.load_extension("help_command")
+
+client.load_extension('error_handler')
 
 #Event when connected
 @client.event
@@ -37,9 +39,9 @@ async def version(context):
     embed.set_author(name="ITAM4Code")
     await context.message.channel.send(embed=embed)
 
-#Create proyect command
-@client.command(name='new_proyect')
-async def create_proyect(context, args):
+#Create project command
+@client.command(name='new_project')
+async def create_project(context, args):
     user=context.message.author
     if any(role.name in approved_roles for role in user.roles):
         if any(args in role.name for role in context.guild.roles):
@@ -69,6 +71,37 @@ async def make_channel(context,name):
         rol: discord.PermissionOverwrite(read_messages=True),
     }
     await guild.create_text_channel(name,overwrites=overwrites)
+
+#Close project command
+@client.command(name='close_project')
+async def remove_role(context,args):
+    user=context.message.author
+    if any(role.name in approved_roles for role in user.roles):
+        if args in approved_roles:
+            await context.message.channel.send('Este rol es administrativo, no se puede cerrar')
+        else:
+            role=get(context.message.guild.roles, name=args)
+            if role:
+                try:
+                    await role.delete()
+                    await context.message.channel.send('El rol asignado al proyecto fue eliminado')
+                except:
+                    await context.message.channel.send('El bot no cuenta con los permisos para eliminar este proyecto')
+            else:
+                await context.message.channel.send('El rol/proyecto no existe')
+    else:
+        await context.message.channel.send('No eres administrador del servidor, no puedes cerrar proyectos')
+    
+#Show projects command
+@client.command(name='show_projects')
+async def show_available_roles(context):
+    guild=context.guild
+    embed=discord.Embed(title="Proyectos activos", description= "Presentando roles activos", color=0x00ff00)
+    embed.set_author(name="ITAM4Code")
+    for role in guild.roles:
+        if not role.name in approved_roles and not role.name in other_roles:
+            embed.add_field(name="Proyecto: "+role.name, value=role.id)
+    await context.message.channel.send(embed=embed)
 
 #Test command
 @client.command(name='test')
