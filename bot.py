@@ -103,6 +103,22 @@ async def show_available_roles(context):
             embed.add_field(name="Proyecto: "+role.name, value=role.id)
     await context.message.channel.send(embed=embed)
 
+
+
+#Abandonar proyecto
+@client.command(name='leave')
+async def leave(context, args): 
+    user=context.message.author
+    for role in user.roles :
+       role=get(context.message.guild.roles, name=args) ##es True si tiene ese rol
+    if role:
+            await role.delete()
+            await context.message.channel.send('El rol asignado al proyecto fue eliminado')     
+    else:
+            await context.message.channel.send('El rol/proyecto no existe')
+    
+    
+
 #Test command
 @client.command(name='test')
 async def test(ctx, arg):
