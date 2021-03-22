@@ -21,12 +21,24 @@ other_roles=['@everyone','Colmillo']
 #Group command help
 client.remove_command("help")
 client.load_extension("help_command")
-
+#Error Handler
 client.load_extension('error_handler')
+#Server ID
+server_ID=821699949493485578
 
 #Event when connected
 @client.event
 async def on_ready():
+    embed=discord.Embed(title="Colmillo conectado!", description="Colmillo es un bot de Discord creado por la "+ 
+        "OE ITAM4Code para facilitar la administración del servidor. Para utilizarlo invócalo con **--help**")
+    #file=discord.Fileembed.set_image(url='attachment://imagenes/colmillo.jpg')
+    embed.set_footer(text="Hello world!")
+    embed.set_author(name="ITAM4Code")
+    embed.set_thumbnail(url='attachment://colmillo.jpg')
+    guild=get(client.guilds,id=server_ID)
+    channel=get(guild.text_channels,name='general')
+    file1=discord.File("imagenes/colmillo.jpg")
+    await channel.send(embed=embed,file=file1)
     await client.change_presence(status=discord.Status.online, activity=discord.Game('ITAM4Code'))
 
 #Version command
