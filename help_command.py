@@ -61,8 +61,16 @@ class Help(commands.Cog):
 
     @help.command()
     async def leave(self,context):
-        embed= discord.Embed(title="leave", description= "Comando para que un usuario deje un proyecto al que esté asignado",color=0x00ff00)
-        embed.add_field(name="**Syntax**", value="--leave [nombre del proyecto]")
+        embed= discord.Embed(title="leave", description= "Comando para que un usuario abandone el rol de un proyecto",color=0x00ff00)
+        embed.add_field(name="**Syntax**", value="--leave [nombre del proyecto] [ID del usuario]")
+        embed.add_field(name="Permissions", value="All Users")
+        embed.set_author(name="ITAM4Code")
+        await context.channel.send(embed=embed)
+    
+    @help.command()
+    async def my_info(self,context):
+        embed= discord.Embed(title="my_info", description= "Obtener tu información de usuario",color=0x00ff00)
+        embed.add_field(name="**Syntax**", value="--my_info")
         embed.add_field(name="Permissions", value="All Users")
         embed.set_author(name="ITAM4Code")
         await context.channel.send(embed=embed)
