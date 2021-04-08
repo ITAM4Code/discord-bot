@@ -92,5 +92,7 @@ class Help(commands.Cog):
         await context.channel.send(embed=embed)
 
 
+
+
 def setup(bot):
     bot.add_cog(Help(bot))

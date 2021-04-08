@@ -8,12 +8,19 @@ import json
 from dotenv import load_dotenv
 from discord.utils import get
 
+
+intents = discord.Intents.default()
+intents.members = True
+client2 = discord.Client(intents = intents)
+#client2=discord.Client(intents=intents)
+
 #Load TOKEN
 load_dotenv()
 token=os.getenv('BOT_TOKEN')
 
 #Prefix
 client = commands.Bot(command_prefix='--')
+
 
 #Approved roles to make few changes
 approved_roles=['admin','mesa']
@@ -25,10 +32,22 @@ client.load_extension("help_command")
 client.load_extension('error_handler')
 
 #Event when connected
-@client.event
+@client2.event
 async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=discord.Game('ITAM4Code'))
+    print('loggeado como')
+    print(client.user.name)
+    print(client.user.id)
 
+# enviar un mensaje de bienvenida: 
+newUserMessage = """ Bienvenido colega!"""
+
+@client2.event
+async def on_member_join(member):
+    guild = client2.get_guild(821699949493485578)
+    channel = guild.get_channel(821699949493485581)
+    await channel.send(newUserMessage + f' {member.mention} ! :partying_face:')
+    await member.send(f'Welcome to the {guild.name} server, {member.name}! :partying_face:')
 
 #Version command
 @client.command(name='version')
@@ -143,6 +162,25 @@ async def inspire(ctx):
     quote = get_quote()
     await ctx.send(quote)
 
+@client.command(name='emoji')
+async def emoji(ctx):
+    await ctx.send("🔥")
+    await ctx.send(":noice:")
+    await ctx.send("<:67069a13e006345ce28ecc581f2ed162>")
+
+
+
+
+
+#@client.event
+#async def on_member_leave(member):
+ #   print("Recognised that a member called " + member.name + " left")
+  #  embed=discord.Embed(title=" Goodbye "+member.name+"!", description="Until we meet again old friend.", color=0x00ff00)
 #Run client
+#embed=discord.Embed(title= "Informacion usuario", description="Bienvenido", color=0x00ff00)
+client2.run(token) 
 client.run(token)
+# puedo tener dos clients?
+
+
     
