@@ -178,8 +178,9 @@ async def emoji(ctx):
   #  embed=discord.Embed(title=" Goodbye "+member.name+"!", description="Until we meet again old friend.", color=0x00ff00)
 #Run client
 #embed=discord.Embed(title= "Informacion usuario", description="Bienvenido", color=0x00ff00)
-client2.run(token) 
 client.run(token)
+client2.run(token) 
+
 # puedo tener dos clients?
 
 
