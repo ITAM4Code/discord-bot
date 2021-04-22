@@ -60,6 +60,22 @@ class Help(commands.Cog):
         await context.channel.send(embed=embed)
 
     @help.command()
+    async def leave(self,context):
+        embed= discord.Embed(title="leave", description= "Comando para que un usuario abandone el rol de un proyecto",color=0x00ff00)
+        embed.add_field(name="**Syntax**", value="--leave [nombre del proyecto] [ID del usuario]")
+        embed.add_field(name="Permissions", value="All Users")
+        embed.set_author(name="ITAM4Code")
+        await context.channel.send(embed=embed)
+    
+    @help.command()
+    async def my_info(self,context):
+        embed= discord.Embed(title="my_info", description= "Obtener tu información de usuario",color=0x00ff00)
+        embed.add_field(name="**Syntax**", value="--my_info")
+        embed.add_field(name="Permissions", value="All Users")
+        embed.set_author(name="ITAM4Code")
+        await context.channel.send(embed=embed)
+
+
     async def close_project(self,context):
         embed= discord.Embed(title="close_project", description= "Elimina el rol asignado al proyecto para que nadie más pueda ingresar. El canal de texto se queda abierto por si se retoma el proyecto",color=0x00ff00)
         embed.add_field(name="**Syntax**", value="--close_project [nombre del proyecto/rol]")
@@ -74,6 +90,9 @@ class Help(commands.Cog):
         embed.add_field(name="Permissions", value="All Users")
         embed.set_author(name="ITAM4Code")
         await context.channel.send(embed=embed)
+
+
+
 
 def setup(bot):
     bot.add_cog(Help(bot))
